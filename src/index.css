@@ -1,0 +1,222 @@
+/* ==========================================================================
+   Design Tokens & Color System — Cosmetics & Aesthetic Clinic
+   Palette: Warm Ivory, Soft Neutrals, Muted Champagne & Bronze Accents
+   ========================================================================== */
+
+:root {
+  /* Surfaces & Backgrounds */
+  --color-bg-base: #fbf9f6;
+  --color-bg-surface: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-bg-subtle: #f5f0ea;
+  --color-bg-accent: #f2ece4;
+  --color-bg-dark: #1f1d1b;
+
+  /* Typography Colors */
+  --color-text-primary: #1f1d1b;
+  --color-text-secondary: #5c5751;
+  --color-text-muted: #8c857e;
+  --color-text-inverse: #fcfbf9;
+
+  /* Restrained Muted Champagne / Bronze Luxury Accent */
+  --color-accent-base: #bfa07a;
+  --color-accent-hover: #aa8962;
+  --color-accent-deep: #8c6e48;
+  --color-accent-surface: rgba(191, 160, 122, 0.08);
+  --color-accent-border: rgba(191, 160, 122, 0.3);
+
+  /* Border Tones */
+  --color-border-subtle: #ece5dd;
+  --color-border-card: #e2d9cd;
+  --color-border-highlight: rgba(191, 160, 122, 0.4);
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing Scale */
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 6rem;
+
+  /* Layout */
+  --max-width: 1200px;
+  --header-height: 80px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Baseline */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p {
+  color: var(--color-text-secondary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--color-accent-base);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all var(--transition-fast);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Section Wrapper */
+.section {
+  padding: var(--space-4xl) 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto var(--space-3xl);
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-accent-deep);
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  padding: 0.3rem 0.85rem;
+  background: var(--color-accent-surface);
+  border: 1px solid var(--color-accent-border);
+  border-radius: var(--radius-full);
+}
+
+.section-title {
+  font-size: clamp(2rem, 3.8vw, 2.75rem);
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-primary);
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.6rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-base);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--color-accent-base);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(191, 160, 122, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(191, 160, 122, 0.35);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-card);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-accent-border);
+  color: var(--color-accent-deep);
+}
+
+/* Card */
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  border-color: var(--color-accent-border);
+  box-shadow: 0 10px 30px rgba(31, 29, 27, 0.06);
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-muted);
+}

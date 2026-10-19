@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Scaffolding Styles
+   ========================================================================== */
+
+.scaffold-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-base);
+}
+
+.scaffold-header {
+  height: var(--header-height);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--color-accent-base);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.scaffold-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: var(--space-4xl) 0;
+}
+
+.scaffold-content {
+  text-align: center;
+  max-width: 640px;
+}
+
+.scaffold-content h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin: var(--space-md) 0;
+}
+
+.scaffold-lead {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2xl);
+}
+
+.status-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  text-align: left;
+  border: 1px solid var(--color-accent-border);
+  background: var(--color-bg-surface);
+}
+
+.status-indicator {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+  flex-shrink: 0;
+}
+
+.status-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+.status-card p {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.scaffold-footer {
+  padding: var(--space-xl) 0;
+  border-top: 1px solid var(--color-border-subtle);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
