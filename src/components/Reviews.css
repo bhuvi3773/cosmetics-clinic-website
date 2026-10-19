@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Reviews Component Styles
+   ========================================================================== */
+
+.reviews-section {
+  background-color: var(--color-bg-base);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .reviews-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.review-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-base);
+}
+
+.review-card:hover {
+  border-color: var(--color-accent-border);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-3px);
+}
+
+.review-stars {
+  color: var(--color-accent-base);
+  font-size: 1.15rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.25rem;
+}
+
+.review-quote {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.review-footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.review-author {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.review-treatment {
+  font-size: 0.78rem;
+  color: var(--color-accent-deep);
+}

@@ -1,0 +1,126 @@
+/* ==========================================================================
+   Packages Component Styles
+   ========================================================================== */
+
+.packages-section {
+  background-color: var(--color-bg-subtle);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.packages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+@media (min-width: 900px) {
+  .packages-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.package-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all var(--transition-base);
+}
+
+.package-card:hover {
+  border-color: var(--color-accent-border);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.package-highlight-badge {
+  position: absolute;
+  top: -12px;
+  right: 1.5rem;
+  background-color: var(--color-accent-deep);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 10px rgba(140, 110, 72, 0.25);
+}
+
+.package-header {
+  margin-bottom: 1.5rem;
+}
+
+.package-name {
+  font-size: 1.45rem;
+  color: var(--color-text-primary);
+  margin-bottom: 0.35rem;
+  line-height: 1.25;
+}
+
+.package-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-accent-deep);
+  font-weight: 500;
+}
+
+.package-pricing {
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin-bottom: 1.5rem;
+}
+
+.package-price-val {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  margin-bottom: 0.2rem;
+}
+
+.package-price-note {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.package-inclusions {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  flex: 1;
+}
+
+.inclusion-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+}
+
+.inclusion-check {
+  color: var(--color-accent-deep);
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.package-footer {
+  margin-top: auto;
+}
+
+.package-cta-btn {
+  width: 100%;
+  padding: 0.82rem;
+  font-size: 0.88rem;
+}

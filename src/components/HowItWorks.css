@@ -1,0 +1,70 @@
+/* ==========================================================================
+   How It Works Component Styles
+   ========================================================================== */
+
+.how-it-works-section {
+  background-color: var(--color-bg-base);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .steps-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.step-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-base);
+}
+
+.step-card:hover {
+  border-color: var(--color-accent-border);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-3px);
+}
+
+.step-number-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.step-number {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--color-accent-base);
+  line-height: 1;
+}
+
+.step-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border-subtle);
+}
+
+.step-title {
+  font-size: 1.2rem;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.step-desc {
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}

@@ -1,0 +1,181 @@
+/* ==========================================================================
+   Contact Component Styles
+   ========================================================================== */
+
+.contact-section {
+  background-color: var(--color-bg-base);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1.1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* Info Column */
+.contact-info-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.info-card-title {
+  font-size: 1.35rem;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.info-card-intro {
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.contact-methods-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.contact-method-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-bg-base);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.method-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.method-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.86rem;
+}
+
+.method-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.method-val {
+  color: var(--color-text-primary);
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.method-link {
+  color: var(--color-accent-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.method-link:hover {
+  color: var(--color-text-primary);
+}
+
+.direct-whatsapp-action {
+  padding-top: 0.5rem;
+}
+
+.full-width-btn {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 0.92rem;
+}
+
+/* Form Column */
+.contact-form-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-card-title {
+  font-size: 1.35rem;
+  color: var(--color-text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.form-card-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+}
+
+.enquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  transition: all var(--transition-fast);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--color-accent-base);
+  background-color: #ffffff;
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-accent-surface);
+}
+
+.form-privacy-note {
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+  text-align: center;
+  margin-top: 0.5rem;
+}
