@@ -1,0 +1,336 @@
+/* ==========================================================================
+   Navbar Component Styles — Luxury Aesthetics Clinic
+   ========================================================================== */
+
+.navbar-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: rgba(251, 249, 246, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-subtle);
+  z-index: 1000;
+  transition: all var(--transition-base);
+}
+
+.navbar-header.is-scrolled {
+  background-color: rgba(251, 249, 246, 0.98);
+  box-shadow: 0 4px 20px rgba(30, 29, 27, 0.05);
+  border-bottom-color: var(--color-border-card);
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Brand Identity */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+}
+
+.brand-monogram {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-bg-dark), #2d2a26);
+  color: var(--color-accent-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  border: 1px solid var(--color-accent-border);
+  box-shadow: 0 2px 8px rgba(30, 29, 27, 0.1);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.brand-subtitle {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-accent-deep);
+  font-weight: 600;
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .desktop-nav {
+    display: block;
+  }
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color var(--transition-fast);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background-color: var(--color-accent-base);
+  transition: width var(--transition-base);
+}
+
+.nav-link:hover {
+  color: var(--color-text-primary);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Desktop CTA */
+.desktop-actions {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .desktop-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.nav-cta-btn {
+  font-size: 0.86rem;
+  padding: 0.65rem 1.35rem;
+}
+
+.whatsapp-icon {
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* Mobile Hamburger Button */
+.hamburger-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-primary);
+}
+
+@media (min-width: 900px) {
+  .hamburger-btn {
+    display: none;
+  }
+}
+
+.hamburger-box {
+  width: 20px;
+  height: 14px;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  width: 20px;
+  height: 2px;
+  background-color: var(--color-text-primary);
+  border-radius: 2px;
+  position: absolute;
+  transition: transform var(--transition-base), top var(--transition-base);
+}
+
+.hamburger-inner {
+  top: 6px;
+}
+
+.hamburger-inner::before {
+  content: '';
+  top: -6px;
+}
+
+.hamburger-inner::after {
+  content: '';
+  top: 6px;
+}
+
+.hamburger-btn.is-active .hamburger-inner {
+  transform: rotate(45deg);
+}
+
+.hamburger-btn.is-active .hamburger-inner::before {
+  top: 0;
+  opacity: 0;
+}
+
+.hamburger-btn.is-active .hamburger-inner::after {
+  top: 0;
+  transform: rotate(-90deg);
+}
+
+/* Mobile Drawer Overlay */
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  pointer-events: none;
+  visibility: hidden;
+  transition: visibility var(--transition-base);
+}
+
+.mobile-drawer.is-open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.mobile-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-bg-overlay);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.mobile-drawer.is-open .mobile-drawer-backdrop {
+  opacity: 1;
+}
+
+.mobile-drawer-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 340px;
+  height: 100%;
+  background-color: var(--color-bg-surface);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--transition-base);
+  padding: 1.75rem;
+  overflow-y: auto;
+}
+
+.mobile-drawer.is-open .mobile-drawer-content {
+  transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.drawer-close-btn {
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
+.drawer-close-btn:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-subtle);
+}
+
+.mobile-nav {
+  margin-top: 1.5rem;
+  flex: 1;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-nav-link {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:focus-visible {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-accent-deep);
+}
+
+.mobile-drawer-footer {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.mobile-cta-btn {
+  width: 100%;
+  font-size: 0.95rem;
+  padding: 0.85rem;
+}
+
+.mobile-drawer-note {
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.4;
+}
