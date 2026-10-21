@@ -23,9 +23,14 @@ export default function Footer() {
       <div className="container footer-grid">
         {/* Brand Column */}
         <div className="footer-brand-col">
-          <div className="footer-brand-title">
-            <span className="footer-monogram" aria-hidden="true">{brand.monogram}</span>
-            <span className="footer-name">{brand.name}</span>
+          <div className="footer-brand-container">
+            <div className="footer-logo-container" aria-hidden="true">
+              <span className="footer-monogram">{brand.monogram}</span>
+            </div>
+            <div className="footer-divider" aria-hidden="true"></div>
+            <div className="footer-text-container">
+              <span className="footer-name">{brand.name}</span>
+            </div>
           </div>
           <p className="footer-tagline">{brand.tagline}</p>
           <p className="footer-mode-pill">{t.footer?.templatePill || 'Front-End Website Template'}</p>

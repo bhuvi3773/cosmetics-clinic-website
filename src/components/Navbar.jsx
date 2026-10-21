@@ -66,12 +66,15 @@ export default function Navbar({ onOpenWhatsAppModal }) {
   return (
     <header className={`navbar-header ${isScrolled ? 'is-scrolled' : ''}`}>
       <div className="container navbar-container">
-        {/* Brand / Logo */}
+        {/* Brand / Logo in Distinct Capsule Container */}
         <a href="#home" className="navbar-brand" onClick={closeMobileMenu} aria-label={`${clinicConfig.brand.name} Home`}>
-          <span className="brand-monogram" aria-hidden="true">
-            {clinicConfig.brand.monogram}
-          </span>
-          <div className="brand-text">
+          <div className="brand-logo-container" aria-hidden="true">
+            <span className="brand-monogram">
+              {clinicConfig.brand.monogram}
+            </span>
+          </div>
+          <div className="brand-divider" aria-hidden="true"></div>
+          <div className="brand-text-container">
             <span className="brand-name">{clinicConfig.brand.name}</span>
             <span className="brand-subtitle">{t.common.templateMode}</span>
           </div>
@@ -143,9 +146,17 @@ export default function Navbar({ onOpenWhatsAppModal }) {
         <div className="mobile-drawer-backdrop" onClick={closeMobileMenu} />
         <div className="mobile-drawer-content">
           <div className="mobile-drawer-header">
-            <div className="brand-text">
-              <span className="brand-name">{clinicConfig.brand.name}</span>
-              <span className="brand-subtitle">{t.common.templateMode}</span>
+            <div className="navbar-brand drawer-brand-badge">
+              <div className="brand-logo-container" aria-hidden="true">
+                <span className="brand-monogram">
+                  {clinicConfig.brand.monogram}
+                </span>
+              </div>
+              <div className="brand-divider" aria-hidden="true"></div>
+              <div className="brand-text-container">
+                <span className="brand-name">{clinicConfig.brand.name}</span>
+                <span className="brand-subtitle">{t.common.templateMode}</span>
+              </div>
             </div>
             <button
               type="button"
