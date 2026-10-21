@@ -14,3 +14,52 @@
 #main-content {
   flex: 1;
 }
+
+/* Floating Replay Intro Action */
+.replay-intro-floating-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 998;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(194, 157, 109, 0.4);
+  color: var(--color-accent-deep);
+  padding: 0.6rem 1.15rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(35, 30, 24, 0.08), 0 0 12px rgba(194, 157, 109, 0.15);
+  transition: all var(--transition-base);
+}
+
+.replay-intro-floating-btn:hover {
+  background: #ffffff;
+  border-color: var(--color-accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(194, 157, 109, 0.25);
+  color: var(--color-text-primary);
+}
+
+.replay-sparkle-icon {
+  color: var(--color-accent-gold);
+  font-size: 0.95rem;
+  animation: sparkleTwinkle 2.5s infinite ease-in-out;
+}
+
+@media (max-width: 640px) {
+  .replay-intro-floating-btn {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.74rem;
+  }
+}
+

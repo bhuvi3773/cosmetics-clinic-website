@@ -1,0 +1,307 @@
+/* ==========================================================================
+   Luxury Opening Intro Splash Styles — Cosmetics Clinic Sanctuary
+   ========================================================================== */
+
+.luxury-splash-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 40%, #ffffff 0%, #faf6f0 55%, #f2eae0 100%);
+  cursor: pointer;
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.65s;
+}
+
+.luxury-splash-overlay.is-exiting {
+  opacity: 0;
+  transform: scale(1.035);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Ambient Glowing Aura Spheres */
+.splash-ambient-aura {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.splash-ambient-aura.aura-primary {
+  width: 480px;
+  height: 480px;
+  top: 15%;
+  left: 20%;
+  background: radial-gradient(circle, rgba(216, 188, 151, 0.45) 0%, rgba(216, 188, 151, 0) 70%);
+  animation: splashAuraFloat 6s ease-in-out infinite alternate;
+}
+
+.splash-ambient-aura.aura-secondary {
+  width: 520px;
+  height: 520px;
+  bottom: 10%;
+  right: 18%;
+  background: radial-gradient(circle, rgba(194, 157, 109, 0.3) 0%, rgba(245, 239, 230, 0) 70%);
+  animation: splashAuraFloat 7s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes splashAuraFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(25px, -18px) scale(1.1); }
+  100% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* Floating Micro Sparkles */
+.splash-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.splash-sparkles .sparkle {
+  position: absolute;
+  color: #c29d6d;
+  font-size: 1.1rem;
+  opacity: 0;
+  animation: sparkleTwinkle 2.2s infinite ease-in-out;
+}
+
+.splash-sparkles .s1 { top: 25%; left: 30%; animation-delay: 0.1s; font-size: 1.4rem; }
+.splash-sparkles .s2 { top: 32%; right: 28%; animation-delay: 0.5s; font-size: 0.95rem; }
+.splash-sparkles .s3 { bottom: 28%; left: 32%; animation-delay: 0.9s; font-size: 1.2rem; }
+.splash-sparkles .s4 { bottom: 35%; right: 30%; animation-delay: 1.3s; font-size: 1rem; }
+
+@keyframes sparkleTwinkle {
+  0%, 100% { opacity: 0; transform: scale(0.6) rotate(0deg); }
+  50% { opacity: 0.85; transform: scale(1.2) rotate(45deg); filter: drop-shadow(0 0 6px rgba(194, 157, 109, 0.8)); }
+}
+
+/* Centerpiece Container */
+.splash-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  max-width: 620px;
+}
+
+/* Emblem with Rotating Orbital Rings */
+.splash-emblem-wrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emblem-orbital-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.emblem-orbital-ring.outer-ring {
+  inset: -12px;
+  border: 1px dashed rgba(194, 157, 109, 0.45);
+  animation: rotateRing 14s linear infinite;
+}
+
+.emblem-orbital-ring.inner-ring {
+  inset: -5px;
+  border: 1px solid rgba(194, 157, 109, 0.35);
+  border-top-color: #c29d6d;
+  border-bottom-color: #947141;
+  animation: rotateRingReverse 8s linear infinite;
+}
+
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotateRingReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.emblem-disc {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1f1d1a 0%, #2f2a24 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #c29d6d;
+  box-shadow: 0 10px 30px rgba(35, 30, 24, 0.18), 0 0 24px rgba(194, 157, 109, 0.3);
+  animation: emblemPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes emblemPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(35, 30, 24, 0.18), 0 0 20px rgba(194, 157, 109, 0.25); }
+  50% { transform: scale(1.04); box-shadow: 0 14px 38px rgba(35, 30, 24, 0.24), 0 0 32px rgba(194, 157, 109, 0.5); }
+}
+
+.emblem-letter {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: #f7ede0;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+/* Typography Reveal */
+.splash-typography {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.splash-eyebrow {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: #947141;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+  opacity: 0;
+  animation: splashFadeUp 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.splash-brand-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: #1a1816;
+  margin: 0;
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0;
+  animation: splashFadeUp 0.9s 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.brand-dot {
+  color: #c29d6d;
+  font-size: 1.4rem;
+  transform: translateY(-2px);
+}
+
+.splash-gold-filament {
+  width: 0px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #c29d6d, transparent);
+  margin: 1.25rem 0 1.1rem;
+  animation: expandFilament 1s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes expandFilament {
+  to { width: 140px; }
+}
+
+.splash-tagline {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: #5c554e;
+  margin: 0;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  animation: splashFadeUp 0.9s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes splashFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Minimalist Progress Track */
+.splash-progress-track {
+  width: 160px;
+  height: 2px;
+  background: rgba(194, 157, 109, 0.18);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 2.2rem;
+  opacity: 0;
+  animation: splashFadeIn 0.5s 0.6s forwards;
+}
+
+.splash-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #947141, #e0c59e, #947141);
+  animation: splashProgress 1.6s 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes splashProgress {
+  0% { width: 0%; }
+  60% { width: 75%; }
+  100% { width: 100%; }
+}
+
+@keyframes splashFadeIn {
+  to { opacity: 1; }
+}
+
+/* Skip / Enter Action */
+.splash-skip-btn {
+  margin-top: 1.8rem;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(194, 157, 109, 0.35);
+  color: #4a433c;
+  padding: 0.55rem 1.35rem;
+  border-radius: 9999px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(35, 30, 24, 0.06);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+  opacity: 0;
+  animation: splashFadeIn 0.6s 0.8s forwards;
+}
+
+.splash-skip-btn:hover {
+  background: #ffffff;
+  border-color: #c29d6d;
+  color: #1a1816;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(194, 157, 109, 0.18);
+}
+
+.skip-arrow {
+  transition: transform 0.25s ease;
+}
+
+.splash-skip-btn:hover .skip-arrow {
+  transform: translateX(3px);
+}

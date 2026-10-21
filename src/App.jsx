@@ -14,12 +14,14 @@ import Footer from './components/Footer';
 import WhatsAppPlaceholderModal from './components/WhatsAppPlaceholderModal';
 import { clinicConfig } from './data/clinicData';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import LuxuryIntroSplash from './components/LuxuryIntroSplash';
 import './App.css';
 
 function AppContent() {
   const { t } = useLanguage();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [showIntro, setShowIntro] = useState(true);
 
   const defaultMsg = t.treatments?.items?.[0]?.enquiryMessage || clinicConfig.contact.defaultEnquiryMessage;
 
@@ -34,6 +36,9 @@ function AppContent() {
 
   return (
     <div className="clinic-app">
+      {/* Luxury Brand Entrance Sequence */}
+      {showIntro && <LuxuryIntroSplash onComplete={() => setShowIntro(false)} />}
+
       {/* Accessibility Skip Link */}
       <a href="#main-content" className="skip-link">
         {t.common.skipLink}
@@ -43,6 +48,16 @@ function AppContent() {
       <div className="demo-top-notice" role="status">
         <span className="notice-pill">{t.common.templateMode}</span>
         <span>{t.common.topBannerText}</span>
+        <button
+          type="button"
+          className="demo-intro-pill-btn"
+          onClick={() => setShowIntro(true)}
+          title="Play Aura Entrance Animation"
+          aria-label="Play luxury cosmetics entrance animation"
+        >
+          <span aria-hidden="true">✦</span>
+          <span>Aura Intro</span>
+        </button>
       </div>
 
       {/* Responsive Header & Navigation with Language Selector */}
@@ -83,6 +98,18 @@ function AppContent() {
 
       {/* Complete Footer */}
       <Footer />
+
+      {/* Replay Luxury Intro Floating Action */}
+      <button
+        type="button"
+        className="replay-intro-floating-btn"
+        onClick={() => setShowIntro(true)}
+        aria-label="Replay luxury entrance animation"
+        title="Experience Sanctuary Intro Sequence"
+      >
+        <span className="replay-sparkle-icon" aria-hidden="true">✦</span>
+        <span className="replay-btn-text">Experience Aura</span>
+      </button>
 
       {/* Accessible WhatsApp Modal for Demo Mode */}
       <WhatsAppPlaceholderModal

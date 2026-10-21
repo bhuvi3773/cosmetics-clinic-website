@@ -1,6 +1,7 @@
 import React from 'react';
 import { clinicConfig } from '../data/clinicData';
 import { useLanguage } from '../context/LanguageContext';
+import { getOptimizedImageUrl, handleImageFallback } from '../utils/imageUtils';
 import './Practitioner.css';
 
 export default function Practitioner() {
@@ -23,12 +24,14 @@ export default function Practitioner() {
               {practitioner.image ? (
                 <div className="practitioner-portrait-wrap">
                   <img
-                    src={practitioner.image}
+                    src={getOptimizedImageUrl(practitioner.image)}
                     alt={practitioner.imageAlt || practitioner.name}
                     className="practitioner-portrait-img"
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
                     width="96"
                     height="96"
+                    onError={handleImageFallback}
                   />
                   <span className="portrait-status-dot" aria-hidden="true"></span>
                 </div>

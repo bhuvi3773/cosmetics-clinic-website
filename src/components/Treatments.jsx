@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { clinicConfig, getWhatsAppAction } from '../data/clinicData';
 import { useLanguage } from '../context/LanguageContext';
+import { getOptimizedImageUrl, handleImageFallback } from '../utils/imageUtils';
 import './Treatments.css';
 
 export default function Treatments({ onOpenWhatsAppModal }) {
@@ -74,14 +75,17 @@ export default function Treatments({ onOpenWhatsAppModal }) {
                 {baseItem.image && (
                   <div className="treatment-media-wrap">
                     <img
-                      src={baseItem.image}
+                      src={getOptimizedImageUrl(baseItem.image)}
                       alt={baseItem.alt || title}
                       className="treatment-card-img"
-                      loading="lazy"
+                      loading="eager"
+                      decoding="async"
                       width="380"
                       height="240"
+                      onError={handleImageFallback}
                     />
                     <div className="treatment-media-overlay" aria-hidden="true"></div>
+                    <div className="treatment-card-sheen" aria-hidden="true"></div>
                     <span className="treatment-category-badge">{categoryLabel}</span>
                     {badge && <span className="treatment-badge">{badge}</span>}
                   </div>

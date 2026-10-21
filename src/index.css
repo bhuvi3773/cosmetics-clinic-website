@@ -391,6 +391,31 @@ img {
   border-radius: var(--radius-full);
 }
 
+.demo-intro-pill-btn {
+  background: #ffffff;
+  color: var(--color-accent-deep);
+  border: 1px solid rgba(194, 157, 109, 0.4);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.65rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  box-shadow: 0 1px 4px rgba(35, 30, 24, 0.05);
+}
+
+.demo-intro-pill-btn:hover {
+  background: var(--color-accent-gold-gradient);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(194, 157, 109, 0.3);
+}
+
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

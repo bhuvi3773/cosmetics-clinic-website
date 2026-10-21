@@ -1,6 +1,7 @@
 import React from 'react';
 import { clinicConfig, getWhatsAppAction } from '../data/clinicData';
 import { useLanguage } from '../context/LanguageContext';
+import { getOptimizedImageUrl, handleImageFallback } from '../utils/imageUtils';
 import './Hero.css';
 
 export default function Hero({ onOpenWhatsAppModal }) {
@@ -23,11 +24,23 @@ export default function Hero({ onOpenWhatsAppModal }) {
 
   return (
     <section id="home" className="hero-section" aria-labelledby="hero-title">
+      {/* Dynamic Ambient Radiant Orbs for Cosmetics Atmosphere */}
+      <div className="hero-ambient-orb orb-gold" aria-hidden="true"></div>
+      <div className="hero-ambient-orb orb-rose" aria-hidden="true"></div>
+      <div className="hero-ambient-orb orb-pearl" aria-hidden="true"></div>
+
+      {/* Floating Ethereal Sparkles */}
+      <div className="hero-sparkles-floating" aria-hidden="true">
+        <span className="hero-sparkle hs-1">✦</span>
+        <span className="hero-sparkle hs-2">✧</span>
+        <span className="hero-sparkle hs-3">✦</span>
+      </div>
+
       <div className="container hero-container">
         {/* Left / Editorial Content Column with gentle fade-and-rise entrance */}
         <div className="hero-content fade-rise">
           <div className="hero-badge-wrap">
-            <span className="section-tag">
+            <span className="section-tag hero-cosmetic-tag">
               <span className="badge-sparkle" aria-hidden="true">✦</span>
               {t.hero.badge || hero.badge}
             </span>
@@ -35,7 +48,7 @@ export default function Hero({ onOpenWhatsAppModal }) {
 
           <h1 id="hero-title" className="hero-title">
             <span className="title-block">{t.hero.titleLight || hero.title.light}</span>
-            <span className="title-accent">{t.hero.titleAccent || hero.title.accent}</span>
+            <span className="title-accent animated-luxury-shimmer">{t.hero.titleAccent || hero.title.accent}</span>
           </h1>
 
           <p className="hero-description">
@@ -91,15 +104,19 @@ export default function Hero({ onOpenWhatsAppModal }) {
         <div className="hero-media-wrapper">
           <div className="hero-image-frame">
             <img
-              src={hero.image.src}
+              src={getOptimizedImageUrl(hero.image.src)}
               alt={hero.image.alt}
               className="hero-image"
               width="680"
               height="510"
               loading="eager"
+              onError={handleImageFallback}
             />
             {/* Subtle luxury overlay gradient */}
             <div className="hero-image-gradient" aria-hidden="true"></div>
+
+            {/* Radiant glass reflection sweep */}
+            <div className="hero-sheen-sweep" aria-hidden="true"></div>
 
             {/* Floating Clinic Feature Badge */}
             <div className="hero-floating-card">
@@ -119,3 +136,4 @@ export default function Hero({ onOpenWhatsAppModal }) {
     </section>
   );
 }
+

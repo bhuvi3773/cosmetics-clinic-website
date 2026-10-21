@@ -111,6 +111,28 @@
   pointer-events: none;
 }
 
+.treatment-card-sheen {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+  transition: none;
+}
+
+.treatment-card:hover .treatment-card-sheen {
+  left: 180%;
+  transition: left 0.85s ease;
+}
+
 .treatment-category-badge {
   position: absolute;
   top: 1rem;

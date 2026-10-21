@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { clinicConfig } from '../data/clinicData';
 import { useLanguage } from '../context/LanguageContext';
+import { getOptimizedImageUrl, handleImageFallback } from '../utils/imageUtils';
 import './Gallery.css';
 
 export default function Gallery() {
@@ -50,10 +51,12 @@ export default function Gallery() {
               >
                 <div className="gallery-image-wrapper">
                   <img
-                    src={baseItem.image}
+                    src={getOptimizedImageUrl(baseItem.image)}
                     alt={alt}
                     className="gallery-image"
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
+                    onError={handleImageFallback}
                   />
                   <div className="gallery-overlay">
                     <span className="gallery-category-pill">{category}</span>
@@ -87,9 +90,10 @@ export default function Gallery() {
                 &times;
               </button>
               <img
-                src={activeItem.image}
+                src={getOptimizedImageUrl(activeItem.image)}
                 alt={activeItem.alt}
                 className="lightbox-img"
+                onError={handleImageFallback}
               />
               <div className="lightbox-caption">
                 <h4>{activeItem.title}</h4>

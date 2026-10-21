@@ -1,6 +1,7 @@
 import React from 'react';
 import { clinicConfig } from '../data/clinicData';
 import { useLanguage } from '../context/LanguageContext';
+import { getOptimizedImageUrl, handleImageFallback } from '../utils/imageUtils';
 import './About.css';
 
 export default function About() {
@@ -22,12 +23,14 @@ export default function About() {
             {about.image && (
               <div className="about-media-frame">
                 <img
-                  src={about.image}
+                  src={getOptimizedImageUrl(about.image)}
                   alt={about.imageAlt}
                   className="about-image"
-                  loading="lazy"
+                  loading="eager"
+                  decoding="async"
                   width="600"
                   height="400"
+                  onError={handleImageFallback}
                 />
                 <div className="about-image-badge">
                   <span className="status-dot" aria-hidden="true"></span>

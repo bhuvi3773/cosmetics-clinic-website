@@ -280,3 +280,144 @@
   color: var(--color-text-secondary);
   line-height: 1.35;
 }
+
+/* ==========================================================================
+   Cosmetics Atmosphere Animations — Ambient Radiance & Luxury Sheen
+   ========================================================================== */
+
+/* Ambient Cosmetic Radiance Orbs */
+.hero-ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(75px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-ambient-orb.orb-gold {
+  width: 440px;
+  height: 440px;
+  top: -80px;
+  right: 5%;
+  background: radial-gradient(circle, rgba(216, 188, 151, 0.32) 0%, rgba(216, 188, 151, 0) 70%);
+  animation: heroOrbFloat 9s ease-in-out infinite alternate;
+}
+
+.hero-ambient-orb.orb-rose {
+  width: 380px;
+  height: 380px;
+  bottom: 20px;
+  left: -40px;
+  background: radial-gradient(circle, rgba(245, 225, 205, 0.45) 0%, rgba(245, 225, 205, 0) 70%);
+  animation: heroOrbFloat 11s ease-in-out infinite alternate-reverse;
+}
+
+.hero-ambient-orb.orb-pearl {
+  width: 300px;
+  height: 300px;
+  top: 35%;
+  left: 45%;
+  background: radial-gradient(circle, rgba(255, 250, 240, 0.6) 0%, rgba(255, 250, 240, 0) 70%);
+  animation: heroOrbFloat 14s ease-in-out infinite alternate;
+}
+
+@keyframes heroOrbFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -24px) scale(1.08); }
+  100% { transform: translate(-25px, 20px) scale(0.96); }
+}
+
+/* Floating Sparkle Micro-particles */
+.hero-sparkles-floating {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-sparkle {
+  position: absolute;
+  color: #c29d6d;
+  font-size: 1rem;
+  opacity: 0;
+  animation: heroSparkleDrift 6s infinite ease-in-out;
+}
+
+.hero-sparkle.hs-1 {
+  top: 18%;
+  left: 12%;
+  animation-delay: 0.5s;
+  font-size: 1.25rem;
+}
+
+.hero-sparkle.hs-2 {
+  top: 38%;
+  left: 52%;
+  animation-delay: 2.2s;
+  font-size: 0.9rem;
+}
+
+.hero-sparkle.hs-3 {
+  bottom: 22%;
+  right: 15%;
+  animation-delay: 4s;
+  font-size: 1.15rem;
+}
+
+@keyframes heroSparkleDrift {
+  0% { opacity: 0; transform: translateY(20px) scale(0.6) rotate(0deg); }
+  35% { opacity: 0.85; transform: translateY(0px) scale(1.1) rotate(45deg); filter: drop-shadow(0 0 6px rgba(194,157,109,0.7)); }
+  70% { opacity: 0.7; transform: translateY(-20px) scale(1) rotate(90deg); }
+  100% { opacity: 0; transform: translateY(-40px) scale(0.4) rotate(135deg); }
+}
+
+/* Animated Luxury Gold Shimmer */
+.animated-luxury-shimmer {
+  background: linear-gradient(110deg, #785a36 0%, #c29d6d 25%, #fff2d6 50%, #c29d6d 75%, #947141 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmerMove 6s linear infinite;
+}
+
+@keyframes goldShimmerMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Glass Sheen Light Sweep on Hero Image Frame */
+.hero-sheen-sweep {
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 80%
+  );
+  transform: rotate(25deg);
+  pointer-events: none;
+  animation: heroSheenSweep 8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes heroSheenSweep {
+  0%, 60% { left: -70%; opacity: 0; }
+  65% { opacity: 1; }
+  85% { left: 140%; opacity: 0.8; }
+  90%, 100% { left: 140%; opacity: 0; }
+}
+
+/* Subtle Cosmetic Tag Glow */
+.hero-cosmetic-tag {
+  box-shadow: 0 0 16px rgba(194, 157, 109, 0.2);
+  animation: tagPulse 3s ease-in-out infinite;
+}
+
+@keyframes tagPulse {
+  0%, 100% { border-color: rgba(194, 157, 109, 0.35); box-shadow: 0 0 12px rgba(194, 157, 109, 0.15); }
+  50% { border-color: rgba(194, 157, 109, 0.6); box-shadow: 0 0 20px rgba(194, 157, 109, 0.35); }
+}
+
