@@ -27,6 +27,7 @@ lerna-debug.log*
 # Testing & Coverage
 coverage/
 .nyc_output/
+/*.png
 
 # Editor / IDE configuration
 .vscode/*

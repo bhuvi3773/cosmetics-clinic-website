@@ -12,6 +12,12 @@ export default function Footer() {
     ? t.footer.copyright(currentYear, brand.name)
     : `© ${currentYear} ${brand.name}. Front-end website template. All details are sample placeholders.`;
 
+  const rawDisclaimer = t.footer?.disclaimer || disclaimer;
+  const safeguardPrefix = t.footer?.safeguardNotice || 'Medical Safeguard Notice:';
+  const cleanDisclaimer = rawDisclaimer.startsWith(safeguardPrefix)
+    ? rawDisclaimer.slice(safeguardPrefix.length).trim()
+    : rawDisclaimer;
+
   return (
     <footer className="site-footer">
       <div className="container footer-grid">
@@ -55,7 +61,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer-disclaimer-box">
           <p className="disclaimer-text">
-            <strong>{t.footer?.safeguardNotice || 'Medical Safeguard Notice:'}</strong> {t.footer?.disclaimer || disclaimer}
+            <strong>{safeguardPrefix}</strong> {cleanDisclaimer}
           </p>
         </div>
 

@@ -1,16 +1,17 @@
 /* ==========================================================================
-   Reviews Component Styles
+   Reviews Component Styles — Patient Feedback & Testimonials
    ========================================================================== */
 
 .reviews-section {
-  background-color: var(--color-bg-base);
-  border-top: 1px solid var(--color-border-subtle);
+  background: radial-gradient(ellipse 60% 40% at 50% 10%, rgba(216, 188, 151, 0.1) 0%, transparent 70%),
+              var(--color-bg-base);
+  position: relative;
 }
 
 .reviews-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.75rem;
+  gap: 2rem;
 }
 
 @media (min-width: 768px) {
@@ -20,50 +21,58 @@
 }
 
 .review-card {
-  background: var(--color-bg-surface);
-  border: 1px solid var(--color-border-card);
+  background: #ffffff;
+  border: 1px solid rgba(223, 213, 197, 0.85);
   border-radius: var(--radius-lg);
-  padding: 2.25rem 2rem;
+  padding: 2.25rem 1.85rem;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 18px rgba(35, 30, 24, 0.04);
   transition: all var(--transition-base);
+  position: relative;
 }
 
 .review-card:hover {
-  border-color: var(--color-accent-border);
-  box-shadow: var(--shadow-sm);
-  transform: translateY(-3px);
+  transform: translateY(-5px);
+  border-color: rgba(194, 157, 109, 0.55);
+  box-shadow: 0 16px 42px rgba(35, 30, 24, 0.09);
 }
 
 .review-stars {
-  color: var(--color-accent-base);
+  color: #c29d6d;
   font-size: 1.15rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   margin-bottom: 1.25rem;
 }
 
 .review-quote {
-  font-size: 0.95rem;
+  font-family: var(--font-serif);
   font-style: italic;
-  color: var(--color-text-secondary);
-  line-height: 1.65;
-  margin-bottom: 1.5rem;
+  font-size: 1.15rem;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
   flex: 1;
 }
 
 .review-footer {
-  padding-top: 1rem;
-  border-top: 1px solid var(--color-border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(194, 157, 109, 0.2);
 }
 
 .review-author {
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 700;
   color: var(--color-text-primary);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.15rem;
 }
 
 .review-treatment {
   font-size: 0.78rem;
   color: var(--color-accent-deep);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }

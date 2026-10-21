@@ -1,40 +1,51 @@
 /* ==========================================================================
-   Design Tokens & Color System — Cosmetics & Aesthetic Clinic
-   Aesthetics: Warm Ivory, Soft Alabaster, Deep Slate, Muted Champagne & Bronze
+   Design Tokens & Color System — High-End Cosmetics & Aesthetic Clinic
+   Aesthetics: Warm Ivory, Soft Alabaster, Deep Obsidian, Champagne Bronze & Gold
+   Reference Inspiration: Luxury Medical Aesthetic Portals (Esland IT quality)
    ========================================================================== */
 
 :root {
   /* Surfaces & Backgrounds */
-  --color-bg-base: #fbf9f6;
+  --color-bg-base: #faf8f5;
   --color-bg-surface: #ffffff;
   --color-bg-card: #ffffff;
-  --color-bg-subtle: #f6f2ec;
-  --color-bg-accent: #f0eae1;
-  --color-bg-dark: #1b1a18;
-  --color-bg-overlay: rgba(27, 26, 24, 0.45);
+  --color-bg-subtle: #f5efe6;
+  --color-bg-accent: #f0e6d8;
+  --color-bg-dark: #151413;
+  --color-bg-dark-card: #1e1c19;
+  --color-bg-overlay: rgba(21, 20, 19, 0.55);
+
+  /* Glassmorphism Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(194, 157, 109, 0.28);
+  --glass-border-strong: rgba(194, 157, 109, 0.5);
+  --glass-shadow: 0 16px 40px rgba(35, 30, 24, 0.07);
 
   /* Typography Colors */
-  --color-text-primary: #1e1d1b;
-  --color-text-secondary: #58534d;
-  --color-text-muted: #888179;
-  --color-text-inverse: #fcfbf9;
+  --color-text-primary: #1c1b18;
+  --color-text-secondary: #5a544b;
+  --color-text-muted: #8c8479;
+  --color-text-inverse: #fbf9f6;
 
-  /* Restrained Muted Champagne / Bronze Luxury Accent */
-  --color-accent-base: #bfa07a;
-  --color-accent-hover: #aa8962;
-  --color-accent-deep: #8c6e48;
-  --color-accent-surface: rgba(191, 160, 122, 0.09);
-  --color-accent-border: rgba(191, 160, 122, 0.35);
+  /* Rich Champagne & Bronze Luxury Accent */
+  --color-accent-base: #c29d6d;
+  --color-accent-hover: #aa8556;
+  --color-accent-deep: #785a36;
+  --color-accent-surface: rgba(194, 157, 109, 0.1);
+  --color-accent-border: rgba(194, 157, 109, 0.35);
+  --color-accent-gold-gradient: linear-gradient(135deg, #d8bc97 0%, #b89363 50%, #947141 100%);
+  --color-accent-dark-gradient: linear-gradient(145deg, #25221d 0%, #161513 100%);
 
-  /* WhatsApp Brand Touch (Subtle luxury balance) */
+  /* WhatsApp Brand Touch */
   --color-whatsapp: #25d366;
-  --color-whatsapp-surface: rgba(37, 211, 102, 0.1);
-  --color-whatsapp-border: rgba(37, 211, 102, 0.25);
+  --color-whatsapp-surface: rgba(37, 211, 102, 0.12);
+  --color-whatsapp-border: rgba(37, 211, 102, 0.3);
 
   /* Border Tones */
-  --color-border-subtle: #ece5dc;
-  --color-border-card: #e2d9cd;
-  --color-border-highlight: rgba(191, 160, 122, 0.45);
+  --color-border-subtle: #eae3d7;
+  --color-border-card: #dfd5c5;
+  --color-border-highlight: rgba(194, 157, 109, 0.55);
 
   /* Typography */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -49,23 +60,26 @@
   --space-xl: 2rem;
   --space-2xl: 3rem;
   --space-3xl: 4.5rem;
-  --space-4xl: 6rem;
+  --space-4xl: 6.5rem;
 
   /* Layout & Geometry */
   --max-width: 1240px;
-  --header-height: 70px;
-  --radius-xs: 3px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  --header-height: 72px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
   --radius-full: 9999px;
 
   /* Transitions & Shadows */
-  --transition-fast: 0.18s ease;
-  --transition-base: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  --shadow-sm: 0 2px 8px rgba(30, 29, 27, 0.04);
-  --shadow-md: 0 8px 24px rgba(30, 29, 27, 0.06);
-  --shadow-lg: 0 16px 40px rgba(30, 29, 27, 0.09);
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-sm: 0 2px 10px rgba(35, 30, 24, 0.04);
+  --shadow-md: 0 8px 24px rgba(35, 30, 24, 0.06);
+  --shadow-lg: 0 18px 45px rgba(35, 30, 24, 0.09);
+  --shadow-card: 0 4px 20px rgba(35, 30, 24, 0.05);
+  --shadow-card-hover: 0 20px 48px rgba(35, 30, 24, 0.11);
 }
 
 /* Reset & Baseline */
@@ -128,9 +142,9 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   color: var(--color-text-primary);
-  line-height: 1.18;
+  line-height: 1.15;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 p {
@@ -192,7 +206,6 @@ img {
   }
 }
 
-
 .section {
   padding: var(--space-3xl) 0;
   position: relative;
@@ -206,7 +219,7 @@ img {
 
 .section-header {
   text-align: center;
-  max-width: 680px;
+  max-width: 720px;
   margin: 0 auto var(--space-3xl);
 }
 
@@ -217,24 +230,30 @@ img {
   gap: 0.5rem;
   font-size: 0.74rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   color: var(--color-accent-deep);
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: var(--space-sm);
-  padding: 0.38rem 0.95rem;
-  background: var(--color-accent-surface);
-  border: 1px solid var(--color-accent-border);
+  padding: 0.42rem 1.05rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(194, 157, 109, 0.1);
   backdrop-filter: blur(8px);
 }
 
+.section-tag .badge-sparkle {
+  color: var(--color-accent-base);
+  font-size: 0.82rem;
+}
+
 .status-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background-color: var(--color-whatsapp);
   display: inline-block;
-  box-shadow: 0 0 4px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 0 6px rgba(37, 211, 102, 0.45);
   flex-shrink: 0;
 }
 
@@ -242,7 +261,7 @@ img {
 @keyframes fadeRise {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -255,16 +274,21 @@ img {
 }
 
 .section-title {
-  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-size: clamp(2.2rem, 4vw, 3.25rem);
   margin-bottom: var(--space-sm);
   color: var(--color-text-primary);
   font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
 }
 
 .section-subtitle {
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   color: var(--color-text-secondary);
-  line-height: 1.6;
+  line-height: 1.65;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Buttons */
@@ -272,11 +296,11 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  padding: 0.8rem 1.6rem;
-  font-size: 0.9rem;
+  gap: 0.6rem;
+  padding: 0.85rem 1.75rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  letter-spacing: 0.015em;
+  letter-spacing: 0.02em;
   border-radius: var(--radius-full);
   transition: all var(--transition-base);
   text-align: center;
@@ -284,24 +308,24 @@ img {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #bfa07a 0%, #aa8962 100%);
+  background: linear-gradient(135deg, #c29d6d 0%, #aa8556 100%);
   color: #ffffff;
   border: 1px solid var(--color-accent-base);
-  box-shadow: 0 4px 14px rgba(191, 160, 122, 0.28);
+  box-shadow: 0 6px 18px rgba(194, 157, 109, 0.32);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #aa8962 0%, #8c6e48 100%);
+  background: linear-gradient(135deg, #aa8556 0%, #856338 100%);
   border-color: var(--color-accent-deep);
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(191, 160, 122, 0.38);
+  box-shadow: 0 10px 25px rgba(194, 157, 109, 0.42);
 }
 
 .btn-secondary {
-  background-color: var(--color-bg-surface);
+  background-color: #ffffff;
   color: var(--color-text-primary);
   border: 1px solid var(--color-border-card);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 8px rgba(35, 30, 24, 0.04);
 }
 
 .btn-secondary:hover {
@@ -309,21 +333,22 @@ img {
   border-color: var(--color-accent-base);
   color: var(--color-accent-deep);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 16px rgba(35, 30, 24, 0.08);
 }
 
 .btn-whatsapp {
-  background: linear-gradient(135deg, #1b1a18 0%, #2b2825 100%);
+  background: linear-gradient(135deg, #22201d 0%, #171614 100%);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 14px rgba(27, 26, 24, 0.18);
+  border: 1px solid rgba(194, 157, 109, 0.35);
+  box-shadow: 0 6px 18px rgba(21, 20, 19, 0.18);
 }
 
 .btn-whatsapp:hover {
-  background: linear-gradient(135deg, #2b2825 0%, #8c6e48 100%);
-  border-color: var(--color-accent-base);
+  background: linear-gradient(135deg, #c29d6d 0%, #a88354 100%);
+  border-color: #c29d6d;
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(140, 110, 72, 0.28);
+  box-shadow: 0 10px 25px rgba(194, 157, 109, 0.38);
 }
 
 .btn-whatsapp-outline {
@@ -338,14 +363,16 @@ img {
   color: var(--color-accent-deep);
 }
 
-/* Subtle Demo Notice Banner */
+/* Luxury Announcement Bar (Champagne Bronze Tint) */
 .demo-top-notice {
-  background-color: var(--color-bg-dark);
-  color: var(--color-text-inverse);
-  font-size: 0.8rem;
-  padding: 0.45rem 1rem;
+  background: linear-gradient(90deg, #f7f3ec 0%, #eee4d5 50%, #f7f3ec 100%);
+  color: #5c4b37;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.38rem 1rem;
   text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(194, 157, 109, 0.28);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -353,13 +380,14 @@ img {
 }
 
 .demo-top-notice .notice-pill {
-  background: rgba(191, 160, 122, 0.25);
-  color: var(--color-accent-base);
-  font-size: 0.68rem;
+  background: rgba(120, 90, 54, 0.12);
+  color: var(--color-accent-deep);
+  border: 1px solid rgba(120, 90, 54, 0.25);
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 0.15rem 0.5rem;
+  padding: 0.12rem 0.55rem;
   border-radius: var(--radius-full);
 }
 
