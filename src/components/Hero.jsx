@@ -1,10 +1,14 @@
 import React from 'react';
 import { clinicConfig, getWhatsAppAction } from '../data/clinicData';
+import { useLanguage } from '../context/LanguageContext';
 import './Hero.css';
 
 export default function Hero({ onOpenWhatsAppModal }) {
+  const { t } = useLanguage();
   const { hero } = clinicConfig;
-  const whatsAppAction = getWhatsAppAction();
+
+  const defaultMsg = t.treatments?.items?.[0]?.enquiryMessage || clinicConfig.contact.defaultEnquiryMessage;
+  const whatsAppAction = getWhatsAppAction(defaultMsg);
 
   const handleWhatsAppClick = (e) => {
     if (!whatsAppAction.isConfigured) {
@@ -15,25 +19,27 @@ export default function Hero({ onOpenWhatsAppModal }) {
     }
   };
 
+  const pillars = t.hero.pillars || hero.trustPillars;
+
   return (
     <section id="home" className="hero-section" aria-labelledby="hero-title">
       <div className="container hero-container">
-        {/* Left / Editorial Content Column */}
-        <div className="hero-content">
+        {/* Left / Editorial Content Column with gentle fade-and-rise entrance */}
+        <div className="hero-content fade-rise">
           <div className="hero-badge-wrap">
             <span className="section-tag">
               <span className="badge-sparkle" aria-hidden="true">✦</span>
-              {hero.badge}
+              {t.hero.badge || hero.badge}
             </span>
           </div>
 
           <h1 id="hero-title" className="hero-title">
-            <span className="title-block">{hero.title.light}</span>
-            <span className="title-accent">{hero.title.accent}</span>
+            <span className="title-block">{t.hero.titleLight || hero.title.light}</span>
+            <span className="title-accent">{t.hero.titleAccent || hero.title.accent}</span>
           </h1>
 
           <p className="hero-description">
-            {hero.description}
+            {t.hero.description || hero.description}
           </p>
 
           <div className="hero-actions">
@@ -43,33 +49,33 @@ export default function Hero({ onOpenWhatsAppModal }) {
               rel={whatsAppAction.isConfigured ? 'noopener noreferrer' : undefined}
               onClick={handleWhatsAppClick}
               className="btn btn-whatsapp hero-primary-btn"
-              aria-label="Enquire via WhatsApp"
+              aria-label={t.hero.primaryCta || hero.primaryCta.text}
             >
               <span className="status-dot" aria-hidden="true"></span>
               <svg
-                width="18"
-                height="18"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="currentColor"
                 aria-hidden="true"
               >
                 <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.101.005.245-.038.382.29.144.346.491 1.199.534 1.286.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.2 1.054.94 1.942 1.23 2.217 1.374.275.145.433.13.592-.058.159-.188.679-.794.86-.1.066.181.274.22.462.29.188.07.318.116.361.188.043.072.043.419-.101.824z" />
               </svg>
-              <span>{hero.primaryCta.text}</span>
+              <span>{t.hero.primaryCta || hero.primaryCta.text}</span>
             </a>
 
             <a
               href={hero.secondaryCta.href}
               className="btn btn-secondary hero-secondary-btn"
             >
-              <span>{hero.secondaryCta.text}</span>
+              <span>{t.hero.secondaryCta || hero.secondaryCta.text}</span>
               <span aria-hidden="true" className="btn-arrow">→</span>
             </a>
           </div>
 
           {/* Trust Highlights Strip */}
-          <div className="hero-trust-strip" aria-label="Sample Feature Highlights">
-            {hero.trustPillars.map((pillar) => (
+          <div className="hero-trust-strip" aria-label="Feature Highlights">
+            {pillars.map((pillar) => (
               <div key={pillar.id} className="trust-pillar-item">
                 <div className="pillar-bullet" aria-hidden="true"></div>
                 <div className="pillar-text">
@@ -103,8 +109,8 @@ export default function Hero({ onOpenWhatsAppModal }) {
                 </svg>
               </div>
               <div className="floating-card-text">
-                <span className="floating-title">{hero.floatingBadge.title}</span>
-                <span className="floating-desc">{hero.floatingBadge.text}</span>
+                <span className="floating-title">{t.hero.floatingBadgeTitle || hero.floatingBadge.title}</span>
+                <span className="floating-desc">{t.hero.floatingBadgeText || hero.floatingBadge.text}</span>
               </div>
             </div>
           </div>

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { clinicConfig, getWhatsAppAction } from '../data/clinicData';
+import { useLanguage } from '../context/LanguageContext';
 import './Treatments.css';
 
 export default function Treatments({ onOpenWhatsAppModal }) {
+  const { t } = useLanguage();
   const { treatments } = clinicConfig;
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -25,77 +27,94 @@ export default function Treatments({ onOpenWhatsAppModal }) {
       <div className="container">
         {/* Section Header */}
         <div className="section-header">
-          <span className="section-tag">{treatments.sectionTag}</span>
-          <h2 id="treatments-title" className="section-title">{treatments.title}</h2>
-          <p className="section-subtitle">{treatments.subtitle}</p>
+          <span className="section-tag">{t.treatments.sectionTag || treatments.sectionTag}</span>
+          <h2 id="treatments-title" className="section-title">{t.treatments.title || treatments.title}</h2>
+          <p className="section-subtitle">{t.treatments.subtitle || treatments.subtitle}</p>
         </div>
 
         {/* Category Filters */}
         <div className="treatment-filters" role="tablist" aria-label="Filter treatments by category">
-          {treatments.categories.map((cat) => (
-            <button
-              key={cat}
-              type="button"
-              role="tab"
-              aria-selected={selectedCategory === cat}
-              className={`filter-btn ${selectedCategory === cat ? 'is-active' : ''}`}
-              onClick={() => setSelectedCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
+          {treatments.categories.map((cat) => {
+            const displayLabel = cat === 'All'
+              ? (t.treatments.allCategories || 'All')
+              : (t.treatments.categories?.[cat] || cat);
+
+            return (
+              <button
+                key={cat}
+                type="button"
+                role="tab"
+                aria-selected={selectedCategory === cat}
+                className={`filter-btn ${selectedCategory === cat ? 'is-active' : ''}`}
+                onClick={() => setSelectedCategory(cat)}
+              >
+                {displayLabel}
+              </button>
+            );
+          })}
         </div>
 
         {/* Treatments Grid */}
         <div className="treatments-grid">
-          {filteredItems.map((item) => {
-            const action = getWhatsAppAction(item.enquiryMessage);
+          {filteredItems.map((baseItem) => {
+            const localized = t.treatments?.items?.find((i) => i.id === baseItem.id) || {};
+            const title = localized.title || baseItem.title;
+            const description = localized.description || baseItem.description;
+            const categoryLabel = localized.category || baseItem.category;
+            const duration = localized.duration || baseItem.duration;
+            const suitableFor = localized.suitableFor || baseItem.suitableFor;
+            const samplePrice = localized.samplePrice || baseItem.samplePrice;
+            const badge = localized.badge || baseItem.badge;
+            const enquiryMessage = localized.enquiryMessage || baseItem.enquiryMessage;
+
+            const action = getWhatsAppAction(enquiryMessage);
+
             return (
-              <article key={item.id} className="treatment-card">
-                {item.image && (
+              <article key={baseItem.id} className="treatment-card">
+                {baseItem.image && (
                   <div className="treatment-media-wrap">
                     <img
-                      src={item.image}
-                      alt={item.alt || item.title}
+                      src={baseItem.image}
+                      alt={baseItem.alt || title}
                       className="treatment-card-img"
                       loading="lazy"
                       width="380"
                       height="240"
                     />
                     <div className="treatment-media-overlay" aria-hidden="true"></div>
-                    <span className="treatment-category-badge">{item.category}</span>
-                    {item.badge && <span className="treatment-badge">{item.badge}</span>}
+                    <span className="treatment-category-badge">{categoryLabel}</span>
+                    {badge && <span className="treatment-badge">{badge}</span>}
                   </div>
                 )}
 
                 <div className="treatment-content">
-                  <h3 className="treatment-title">{item.title}</h3>
-                  <p className="treatment-desc">{item.description}</p>
+                  <h3 className="treatment-title">{title}</h3>
+                  <p className="treatment-desc">{description}</p>
 
                   <div className="treatment-meta">
                     <div className="meta-item">
-                      <span className="meta-label">Format:</span>
-                      <span className="meta-val">{item.duration}</span>
+                      <span className="meta-label">{t.common.formatLabel || 'Format:'}</span>
+                      <span className="meta-val">{duration}</span>
                     </div>
                     <div className="meta-item">
-                      <span className="meta-label">Focus:</span>
-                      <span className="meta-val">{item.suitableFor}</span>
+                      <span className="meta-label">{t.common.focusLabel || 'Focus:'}</span>
+                      <span className="meta-val">{suitableFor}</span>
                     </div>
                   </div>
 
                   <div className="treatment-card-footer">
                     <div className="treatment-price-wrap">
-                      <span className="price-tag">{item.samplePrice}</span>
+                      <span className="price-tag">{samplePrice}</span>
                     </div>
                     <a
                       href={action.url || '#'}
                       target={action.isConfigured ? '_blank' : undefined}
                       rel={action.isConfigured ? 'noopener noreferrer' : undefined}
-                      onClick={(e) => handleEnquire(e, item)}
+                      onClick={(e) => handleEnquire(e, { ...baseItem, enquiryMessage })}
                       className="btn btn-secondary treatment-cta-btn"
-                      aria-label={`Enquire about ${item.title}`}
+                      aria-label={`${t.common.enquire || 'Enquire'} - ${title}`}
                     >
-                      <span>Enquire</span>
+                      <span>{t.common.enquire || 'Enquire'}</span>
                       <span aria-hidden="true">→</span>
                     </a>
                   </div>
@@ -108,7 +127,7 @@ export default function Treatments({ onOpenWhatsAppModal }) {
         {/* Consultation Disclaimer Note */}
         <div className="treatments-note">
           <p>
-            <strong>Consultation Note:</strong> Individual treatment suitability and protocol selection are determined strictly during an in-person clinical assessment. Prices listed are demonstration examples.
+            {t.treatments.consultationNote || treatments.consultationNote}
           </p>
         </div>
       </div>

@@ -1,17 +1,21 @@
 import React from 'react';
 import { clinicConfig } from '../data/clinicData';
+import { useLanguage } from '../context/LanguageContext';
 import './Practitioner.css';
 
 export default function Practitioner() {
+  const { t } = useLanguage();
   const { practitioner } = clinicConfig;
+
+  const credentials = t.practitioner.credentials || practitioner.credentials;
 
   return (
     <section id="practitioner" className="section practitioner-section" aria-labelledby="practitioner-title">
       <div className="container">
         <div className="practitioner-card">
           <div className="practitioner-header">
-            <span className="section-tag">{practitioner.sectionTag}</span>
-            <h2 id="practitioner-title" className="section-title">{practitioner.title}</h2>
+            <span className="section-tag">{t.practitioner.sectionTag || practitioner.sectionTag}</span>
+            <h2 id="practitioner-title" className="section-title">{t.practitioner.title || practitioner.title}</h2>
           </div>
 
           <div className="practitioner-body">
@@ -34,17 +38,19 @@ export default function Practitioner() {
                 </div>
               )}
               <div className="practitioner-name-group">
-                <h3 className="practitioner-name">{practitioner.name}</h3>
-                <span className="practitioner-role">{practitioner.role}</span>
+                <h3 className="practitioner-name">{t.practitioner.name || practitioner.name}</h3>
+                <span className="practitioner-role">{t.practitioner.role || practitioner.role}</span>
               </div>
             </div>
 
-            <p className="practitioner-bio">{practitioner.bio}</p>
+            <p className="practitioner-bio">{t.practitioner.bio || practitioner.bio}</p>
 
             <div className="credentials-block">
-              <h4 className="credentials-title">Professional Qualifications & Registrations [Placeholders]</h4>
+              <h4 className="credentials-title">
+                {t.practitioner.credentialsHeading || 'Professional Qualifications & Registrations [Placeholders]'}
+              </h4>
               <div className="credentials-chips" aria-label="Professional credentials placeholders">
-                {practitioner.credentials.map((cred, idx) => (
+                {credentials.map((cred, idx) => (
                   <span key={idx} className="credential-chip">
                     <span className="chip-icon" aria-hidden="true">✦</span>
                     <span>{cred}</span>
@@ -55,7 +61,7 @@ export default function Practitioner() {
 
             <div className="practitioner-notice-banner" role="note">
               <span className="notice-icon" aria-hidden="true">ℹ</span>
-              <p>{practitioner.credentialsNotice}</p>
+              <p>{t.practitioner.credentialsNotice || practitioner.credentialsNotice}</p>
             </div>
           </div>
         </div>

@@ -13,14 +13,18 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppPlaceholderModal from './components/WhatsAppPlaceholderModal';
 import { clinicConfig } from './data/clinicData';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import './App.css';
 
-function App() {
+function AppContent() {
+  const { t } = useLanguage();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMessage, setModalMessage] = useState(clinicConfig.contact.defaultEnquiryMessage);
+  const [modalMessage, setModalMessage] = useState('');
+
+  const defaultMsg = t.treatments?.items?.[0]?.enquiryMessage || clinicConfig.contact.defaultEnquiryMessage;
 
   const handleOpenWhatsAppModal = (customMessage) => {
-    setModalMessage(customMessage || clinicConfig.contact.defaultEnquiryMessage);
+    setModalMessage(customMessage || defaultMsg);
     setIsModalOpen(true);
   };
 
@@ -32,18 +36,16 @@ function App() {
     <div className="clinic-app">
       {/* Accessibility Skip Link */}
       <a href="#main-content" className="skip-link">
-        Skip to main content
+        {t.common.skipLink}
       </a>
 
       {/* Top Demo Configuration Notice Banner */}
       <div className="demo-top-notice" role="status">
-        <span className="notice-pill">Template Mode</span>
-        <span>
-          Aesthetic Clinic Template Demo — Contact points, treatment menu, and practitioner details are customizable placeholders in <code>clinicData.js</code>
-        </span>
+        <span className="notice-pill">{t.common.templateMode}</span>
+        <span>{t.common.topBannerText}</span>
       </div>
 
-      {/* Responsive Header & Navigation */}
+      {/* Responsive Header & Navigation with Language Selector */}
       <Navbar onOpenWhatsAppModal={handleOpenWhatsAppModal} />
 
       {/* Main Content Area */}
@@ -86,11 +88,17 @@ function App() {
       <WhatsAppPlaceholderModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        message={modalMessage}
+        message={modalMessage || defaultMsg}
         rawNumber={clinicConfig.contact.whatsAppNumber}
       />
     </div>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
+  );
+}

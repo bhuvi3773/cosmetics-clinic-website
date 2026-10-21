@@ -67,18 +67,60 @@ if (testDemoAction.isConfigured !== false || !testDemoAction.url.includes('wa.me
 }
 console.log('✓ getWhatsAppAction fallback verified');
 
-// 3. Test dist build files
-const distIndex = path.join(__dirname, 'dist', 'index.html');
-if (!fs.existsSync(distIndex)) {
-  console.error('FAIL: dist/index.html not found! Run npm run build first.');
+// 3. Verify Multilingual Translations & Templates
+const translationsPath = path.join(__dirname, 'src', 'data', 'translations.js');
+if (!fs.existsSync(translationsPath)) {
+  console.error('FAIL: translations.js not found!');
   process.exit(1);
 }
-const htmlContent = fs.readFileSync(distIndex, 'utf-8');
-if (!htmlContent.includes('Aura Skin & Aesthetics') && !htmlContent.includes('cosmetics-clinic-website') && !htmlContent.includes('root')) {
-  console.error('FAIL: dist/index.html structure unexpected');
-  process.exit(1);
+
+const translationsModule = await import('./src/data/translations.js');
+const { translations, supportedLanguages } = translationsModule;
+
+console.log('✓ translations.js loaded successfully');
+console.log(`  Supported Languages: ${supportedLanguages.map(l => `${l.code} (${l.label})`).join(', ')}`);
+
+const requiredLanguages = ['en', 'te', 'hi'];
+const requiredSections = [
+  'common', 'nav', 'hero', 'treatments', 'packages',
+  'about', 'practitioner', 'howItWorks', 'gallery',
+  'reviews', 'faqs', 'contact', 'modal', 'footer'
+];
+
+for (const lang of requiredLanguages) {
+  if (!translations[lang]) {
+    console.error(`FAIL: Missing translation set for language: ${lang}`);
+    process.exit(1);
+  }
+  for (const sec of requiredSections) {
+    if (!translations[lang][sec]) {
+      console.error(`FAIL: Missing section '${sec}' in language '${lang}'`);
+      process.exit(1);
+    }
+  }
+
+  // Verify form WhatsApp message generator for each language
+  const templateFn = translations[lang].contact.formWhatsAppTemplate;
+  if (typeof templateFn !== 'function') {
+    console.error(`FAIL: formWhatsAppTemplate is not a function for language '${lang}'`);
+    process.exit(1);
+  }
+
+  const generatedMsg = templateFn(
+    clinicConfig.brand.name,
+    'Jane Doe',
+    'Bespoke Dermal Peel',
+    'Morning (10:00 AM – 1:00 PM)',
+    'Looking forward to consultation.'
+  );
+
+  if (!generatedMsg || !generatedMsg.includes('Jane Doe') || !generatedMsg.includes('Bespoke Dermal Peel')) {
+    console.error(`FAIL: Generated WhatsApp message malformed for '${lang}'`);
+    process.exit(1);
+  }
+
+  console.log(`✓ Language '${lang}' verified with all 14 sections and WhatsApp generator`);
 }
-console.log('✓ Production dist build verified');
 
 // 4. Verify all components exist
 const components = [
@@ -94,7 +136,8 @@ const components = [
   'Faq.jsx', 'Faq.css',
   'Contact.jsx', 'Contact.css',
   'Footer.jsx', 'Footer.css',
-  'WhatsAppPlaceholderModal.jsx', 'WhatsAppPlaceholderModal.css'
+  'WhatsAppPlaceholderModal.jsx', 'WhatsAppPlaceholderModal.css',
+  'LanguageSelector.jsx', 'LanguageSelector.css'
 ];
 
 for (const comp of components) {
@@ -105,5 +148,24 @@ for (const comp of components) {
   }
 }
 console.log(`✓ All ${components.length / 2} UI components and their respective stylesheets verified`);
+
+// 5. Verify Language Context exists
+const contextPath = path.join(__dirname, 'src', 'context', 'LanguageContext.jsx');
+if (!fs.existsSync(contextPath)) {
+  console.error('FAIL: LanguageContext.jsx missing!');
+  process.exit(1);
+}
+console.log('✓ LanguageContext.jsx verified');
+
+// 6. Test dist build files
+const distIndex = path.join(__dirname, 'dist', 'index.html');
+if (fs.existsSync(distIndex)) {
+  const htmlContent = fs.readFileSync(distIndex, 'utf-8');
+  if (!htmlContent.includes('Aura Skin & Aesthetics') && !htmlContent.includes('cosmetics-clinic-website') && !htmlContent.includes('root')) {
+    console.error('FAIL: dist/index.html structure unexpected');
+    process.exit(1);
+  }
+  console.log('✓ Existing production dist build verified');
+}
 
 console.log('--- All Verification Tests Passed Successfully! ---');

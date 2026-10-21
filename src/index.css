@@ -38,7 +38,7 @@
 
   /* Typography */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'DM Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'DM Sans', 'Plus Jakarta Sans', 'Noto Sans Devanagari', 'Noto Sans Telugu', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Spacing Scale */
   --space-2xs: 0.25rem;
@@ -53,7 +53,7 @@
 
   /* Layout & Geometry */
   --max-width: 1240px;
-  --header-height: 84px;
+  --header-height: 70px;
   --radius-xs: 3px;
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -174,8 +174,15 @@ img {
   max-width: var(--max-width);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 480px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -184,6 +191,7 @@ img {
     padding-right: 2rem;
   }
 }
+
 
 .section {
   padding: var(--space-3xl) 0;
@@ -226,13 +234,24 @@ img {
   border-radius: 50%;
   background-color: var(--color-whatsapp);
   display: inline-block;
-  box-shadow: 0 0 8px rgba(37, 211, 102, 0.6);
-  animation: pulse-dot 2s infinite ease-in-out;
+  box-shadow: 0 0 4px rgba(37, 211, 102, 0.4);
+  flex-shrink: 0;
 }
 
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.75; }
+/* Gentle Entrance Animation */
+@keyframes fadeRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-rise {
+  animation: fadeRise 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .section-title {

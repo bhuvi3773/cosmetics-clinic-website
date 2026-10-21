@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import './WhatsAppPlaceholderModal.css';
 
 /**
@@ -6,6 +7,7 @@ import './WhatsAppPlaceholderModal.css';
  * while the WhatsApp phone number is still in placeholder/demo mode.
  */
 export default function WhatsAppPlaceholderModal({ isOpen, onClose, message, rawNumber }) {
+  const { t } = useLanguage();
   const modalRef = useRef(null);
   const closeBtnRef = useRef(null);
 
@@ -52,14 +54,14 @@ export default function WhatsAppPlaceholderModal({ isOpen, onClose, message, raw
             </svg>
           </div>
           <div>
-            <span className="modal-kicker">Template Demo Configuration</span>
-            <h3 id="modal-title" className="modal-title">WhatsApp Consultation Notice</h3>
+            <span className="modal-kicker">{t.modal?.kicker || 'Template Demo Configuration'}</span>
+            <h3 id="modal-title" className="modal-title">{t.modal?.title || 'WhatsApp Consultation Notice'}</h3>
           </div>
           <button
             type="button"
             className="modal-close-btn"
             onClick={onClose}
-            aria-label="Close dialog"
+            aria-label={t.modal?.dismiss || 'Close dialog'}
             ref={closeBtnRef}
           >
             &times;
@@ -68,19 +70,19 @@ export default function WhatsAppPlaceholderModal({ isOpen, onClose, message, raw
 
         <div className="modal-body" id="modal-description">
           <p className="modal-intro">
-            This website template uses a <strong>centralized clinic configuration</strong>. The clinic's real WhatsApp phone number has not been connected yet.
+            {t.modal?.intro || "This website template uses a centralized clinic configuration. The clinic's real WhatsApp phone number has not been connected yet."}
           </p>
 
           <div className="modal-code-callout">
-            <div className="callout-label">To connect your live clinic WhatsApp:</div>
-            <code>Open: src/data/clinicData.js</code>
+            <div className="callout-label">{t.modal?.connectHeader || 'To connect your live clinic WhatsApp:'}</div>
+            <code>{t.modal?.filePath || 'Open: src/data/clinicData.js'}</code>
             <p className="callout-instruction">
-              Set <code>contact.whatsAppNumber = "447XXXXXXXXX"</code> in international digits (no + or spaces).
+              {t.modal?.instruction || 'Set contact.whatsAppNumber = "447XXXXXXXXX" in international digits (no + or spaces).'}
             </p>
           </div>
 
           <div className="modal-preview-message">
-            <div className="preview-label">Prefilled Message Template:</div>
+            <div className="preview-label">{t.modal?.previewLabel || 'Prefilled Message Template:'}</div>
             <p className="preview-text">"{message}"</p>
           </div>
         </div>
@@ -93,15 +95,15 @@ export default function WhatsAppPlaceholderModal({ isOpen, onClose, message, raw
             className="btn btn-whatsapp modal-demo-link"
             onClick={onClose}
           >
-            <span>Test Launch</span>
+            <span>{t.modal?.testLaunch || 'Test Launch'}</span>
             <span aria-hidden="true">→</span>
           </a>
           <button
             type="button"
-            className="btn btn-secondary"
+            className="btn btn-secondary modal-cancel-btn"
             onClick={onClose}
           >
-            Dismiss
+            {t.modal?.dismiss || 'Dismiss'}
           </button>
         </div>
       </div>

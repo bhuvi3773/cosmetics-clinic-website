@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { clinicConfig } from '../data/clinicData';
+import { useLanguage } from '../context/LanguageContext';
 import './Faq.css';
 
 export default function Faq() {
+  const { t } = useLanguage();
   const { faqs } = clinicConfig;
   const [openId, setOpenId] = useState(faqs.items[0]?.id || null);
 
@@ -14,38 +16,42 @@ export default function Faq() {
     <section id="faqs" className="section faq-section" aria-labelledby="faq-title">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">{faqs.sectionTag}</span>
-          <h2 id="faq-title" className="section-title">{faqs.title}</h2>
-          <p className="section-subtitle">{faqs.subtitle}</p>
+          <span className="section-tag">{t.faqs.sectionTag || faqs.sectionTag}</span>
+          <h2 id="faq-title" className="section-title">{t.faqs.title || faqs.title}</h2>
+          <p className="section-subtitle">{t.faqs.subtitle || faqs.subtitle}</p>
         </div>
 
         <div className="faq-accordion" role="region" aria-label="Frequently Asked Questions Accordion">
-          {faqs.items.map((item) => {
-            const isOpen = openId === item.id;
+          {faqs.items.map((baseItem) => {
+            const localized = t.faqs?.items?.find((f) => f.id === baseItem.id) || {};
+            const question = localized.question || baseItem.question;
+            const answer = localized.answer || baseItem.answer;
+            const isOpen = openId === baseItem.id;
+
             return (
-              <div key={item.id} className={`faq-item ${isOpen ? 'is-open' : ''}`}>
+              <div key={baseItem.id} className={`faq-item ${isOpen ? 'is-open' : ''}`}>
                 <button
                   type="button"
                   className="faq-question-btn"
-                  onClick={() => toggleItem(item.id)}
+                  onClick={() => toggleItem(baseItem.id)}
                   aria-expanded={isOpen}
-                  aria-controls={`faq-answer-${item.id}`}
-                  id={`faq-btn-${item.id}`}
+                  aria-controls={`faq-answer-${baseItem.id}`}
+                  id={`faq-btn-${baseItem.id}`}
                 >
-                  <span className="faq-question-text">{item.question}</span>
+                  <span className="faq-question-text">{question}</span>
                   <span className="faq-toggle-icon" aria-hidden="true">
                     {isOpen ? '−' : '+'}
                   </span>
                 </button>
 
                 <div
-                  id={`faq-answer-${item.id}`}
+                  id={`faq-answer-${baseItem.id}`}
                   className="faq-answer-panel"
                   role="region"
-                  aria-labelledby={`faq-btn-${item.id}`}
+                  aria-labelledby={`faq-btn-${baseItem.id}`}
                   hidden={!isOpen}
                 >
-                  <p className="faq-answer-text">{item.answer}</p>
+                  <p className="faq-answer-text">{answer}</p>
                 </div>
               </div>
             );

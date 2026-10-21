@@ -1,18 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { clinicConfig, getWhatsAppAction } from '../data/clinicData';
+import { useLanguage } from '../context/LanguageContext';
 import './Contact.css';
 
 export default function Contact({ onOpenWhatsAppModal }) {
+  const { t } = useLanguage();
   const { contact, treatments, contactForm } = clinicConfig;
   const whatsAppAction = getWhatsAppAction();
 
+  const defaultTreatment = t.treatments?.items?.[0]?.title || treatments.items[0]?.title || '';
+  const timeOptions = t.contact?.timeOptions || [
+    'Morning (10:00 AM – 1:00 PM)',
+    'Afternoon (1:00 PM – 4:00 PM)',
+    'Late Afternoon (4:00 PM – 6:00 PM)',
+    'Saturday Appointment',
+  ];
+
   const [formData, setFormData] = useState({
     name: '',
-    phone: '',
-    treatment: treatments.items[0]?.title || '',
-    timePreference: 'Morning (10:00 AM – 1:00 PM)',
+    treatment: defaultTreatment,
+    timePreference: timeOptions[0] || 'Morning (10:00 AM – 1:00 PM)',
     notes: '',
   });
+
+  // Update default treatment and time preference when language changes if untouched
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      treatment: prev.treatment ? prev.treatment : (t.treatments?.items?.[0]?.title || defaultTreatment),
+      timePreference: prev.timePreference ? prev.timePreference : (timeOptions[0] || 'Morning (10:00 AM – 1:00 PM)'),
+    }));
+  }, [t]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +40,20 @@ export default function Contact({ onOpenWhatsAppModal }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formattedMessage = `Hello ${clinicConfig.brand.name},\nMy name is ${formData.name || 'a visitor'}.\nI would like to enquire about: ${formData.treatment}.\nPreferred Time: ${formData.timePreference}.\nNotes: ${formData.notes || 'None provided.'}`;
+    const clinicName = clinicConfig.brand.name;
+    let formattedMessage = '';
+
+    if (typeof t.contact?.formWhatsAppTemplate === 'function') {
+      formattedMessage = t.contact.formWhatsAppTemplate(
+        clinicName,
+        formData.name,
+        formData.treatment,
+        formData.timePreference,
+        formData.notes
+      );
+    } else {
+      formattedMessage = `Hello ${clinicName},\nMy name is ${formData.name || 'a visitor'}.\nI would like to enquire about: ${formData.treatment}.\nPreferred Time: ${formData.timePreference}.\nNotes: ${formData.notes || 'None provided.'}`;
+    }
 
     const action = getWhatsAppAction(formattedMessage);
 
@@ -36,10 +67,13 @@ export default function Contact({ onOpenWhatsAppModal }) {
   };
 
   const handleDirectWhatsApp = (e) => {
-    if (!whatsAppAction.isConfigured) {
+    const defaultMsg = t.treatments?.items?.[0]?.enquiryMessage || clinicConfig.contact.defaultEnquiryMessage;
+    const directAction = getWhatsAppAction(defaultMsg);
+
+    if (!directAction.isConfigured) {
       e.preventDefault();
       if (onOpenWhatsAppModal) {
-        onOpenWhatsAppModal(whatsAppAction.displayMessage);
+        onOpenWhatsAppModal(directAction.displayMessage);
       }
     }
   };
@@ -48,25 +82,25 @@ export default function Contact({ onOpenWhatsAppModal }) {
     <section id="contact" className="section contact-section" aria-labelledby="contact-title">
       <div className="container">
         <div className="section-header">
-          <span className="section-tag">{contactForm.sectionTag}</span>
-          <h2 id="contact-title" className="section-title">{contactForm.title}</h2>
-          <p className="section-subtitle">{contactForm.subtitle}</p>
+          <span className="section-tag">{t.contact?.sectionTag || contactForm.sectionTag}</span>
+          <h2 id="contact-title" className="section-title">{t.contact?.title || contactForm.title}</h2>
+          <p className="section-subtitle">{t.contact?.subtitle || contactForm.subtitle}</p>
         </div>
 
         <div className="contact-grid">
           {/* Clinic Details Column */}
           <div className="contact-info-col">
             <div className="contact-info-card">
-              <h3 className="info-card-title">Clinic Visiting & Enquiries</h3>
+              <h3 className="info-card-title">{t.contact?.infoTitle || 'Clinic Visiting & Enquiries'}</h3>
               <p className="info-card-intro">
-                All treatments and consultations take place in-person at our clinic suites. Reach out directly via WhatsApp for quick scheduling.
+                {t.contact?.infoIntro || 'All treatments and consultations take place in-person at our clinic suites. Reach out directly via WhatsApp for quick scheduling.'}
               </p>
 
               <div className="contact-methods-list">
                 <div className="contact-method-item">
                   <div className="method-icon" aria-hidden="true">💬</div>
                   <div className="method-text">
-                    <span className="method-label">Direct WhatsApp:</span>
+                    <span className="method-label">{t.contact?.methodWhatsApp || 'Direct WhatsApp:'}</span>
                     <a
                       href={whatsAppAction.url || '#'}
                       target={whatsAppAction.isConfigured ? '_blank' : undefined}
@@ -82,7 +116,7 @@ export default function Contact({ onOpenWhatsAppModal }) {
                 <div className="contact-method-item">
                   <div className="method-icon" aria-hidden="true">📞</div>
                   <div className="method-text">
-                    <span className="method-label">Telephone:</span>
+                    <span className="method-label">{t.contact?.methodPhone || 'Telephone:'}</span>
                     <span className="method-val">{contact.phoneDisplay}</span>
                   </div>
                 </div>
@@ -90,7 +124,7 @@ export default function Contact({ onOpenWhatsAppModal }) {
                 <div className="contact-method-item">
                   <div className="method-icon" aria-hidden="true">✉️</div>
                   <div className="method-text">
-                    <span className="method-label">Email:</span>
+                    <span className="method-label">{t.contact?.methodEmail || 'Email:'}</span>
                     <span className="method-val">{contact.emailDisplay}</span>
                   </div>
                 </div>
@@ -98,7 +132,7 @@ export default function Contact({ onOpenWhatsAppModal }) {
                 <div className="contact-method-item">
                   <div className="method-icon" aria-hidden="true">📍</div>
                   <div className="method-text">
-                    <span className="method-label">Clinic Address:</span>
+                    <span className="method-label">{t.contact?.methodAddress || 'Clinic Address:'}</span>
                     <span className="method-val">{contact.addressDisplay}</span>
                   </div>
                 </div>
@@ -106,7 +140,7 @@ export default function Contact({ onOpenWhatsAppModal }) {
                 <div className="contact-method-item">
                   <div className="method-icon" aria-hidden="true">🕒</div>
                   <div className="method-text">
-                    <span className="method-label">Clinic Hours:</span>
+                    <span className="method-label">{t.contact?.methodHours || 'Clinic Hours:'}</span>
                     <span className="method-val">{contact.openingHoursDisplay}</span>
                   </div>
                 </div>
@@ -124,7 +158,7 @@ export default function Contact({ onOpenWhatsAppModal }) {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.101.005.245-.038.382.29.144.346.491 1.199.534 1.286.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.2 1.054.94 1.942 1.23 2.217 1.374.275.145.433.13.592-.058.159-.188.679-.794.86-.1.066.181.274.22.462.29.188.07.318.116.361.188.043.072.043.419-.101.824z" />
                   </svg>
-                  <span>Chat on WhatsApp</span>
+                  <span>{t.common?.chatOnWhatsApp || 'Chat on WhatsApp'}</span>
                 </a>
               </div>
             </div>
@@ -133,14 +167,14 @@ export default function Contact({ onOpenWhatsAppModal }) {
           {/* WhatsApp Quick Enquiry Form (Frontend-only) */}
           <div className="contact-form-col">
             <div className="contact-form-card">
-              <h3 className="form-card-title">Prepare Consultation Enquiry</h3>
+              <h3 className="form-card-title">{t.contact?.formTitle || 'Prepare Consultation Enquiry'}</h3>
               <p className="form-card-desc">
-                Fill in your details below to compose a prefilled WhatsApp enquiry message.
+                {t.contact?.formDesc || 'Fill in your details below to compose a prefilled WhatsApp enquiry message.'}
               </p>
 
               <form onSubmit={handleSubmit} className="enquiry-form">
                 <div className="form-group">
-                  <label htmlFor="form-name" className="form-label">Your Name</label>
+                  <label htmlFor="form-name" className="form-label">{t.contact?.labelName || 'Your Name'}</label>
                   <input
                     type="text"
                     id="form-name"
@@ -148,13 +182,13 @@ export default function Contact({ onOpenWhatsAppModal }) {
                     className="form-input"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="e.g. Eleanor Vance"
+                    placeholder={t.contact?.placeholderName || 'e.g. Eleanor Vance'}
                     required
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="form-treatment" className="form-label">Treatment of Interest</label>
+                  <label htmlFor="form-treatment" className="form-label">{t.contact?.labelTreatment || 'Treatment of Interest'}</label>
                   <select
                     id="form-treatment"
                     name="treatment"
@@ -162,17 +196,19 @@ export default function Contact({ onOpenWhatsAppModal }) {
                     value={formData.treatment}
                     onChange={handleChange}
                   >
-                    {treatments.items.map((t) => (
-                      <option key={t.id} value={t.title}>
-                        {t.title}
+                    {(t.treatments?.items || treatments.items).map((item) => (
+                      <option key={item.id} value={item.title}>
+                        {item.title}
                       </option>
                     ))}
-                    <option value="General Consultation">General Skin Assessment</option>
+                    <option value={t.contact?.labelGeneralAssessment || 'General Skin Assessment'}>
+                      {t.contact?.labelGeneralAssessment || 'General Skin Assessment'}
+                    </option>
                   </select>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="form-time" className="form-label">Preferred Appointment Time</label>
+                  <label htmlFor="form-time" className="form-label">{t.contact?.labelTime || 'Preferred Appointment Time'}</label>
                   <select
                     id="form-time"
                     name="timePreference"
@@ -180,15 +216,16 @@ export default function Contact({ onOpenWhatsAppModal }) {
                     value={formData.timePreference}
                     onChange={handleChange}
                   >
-                    <option value="Morning (10:00 AM – 1:00 PM)">Morning (10:00 AM – 1:00 PM)</option>
-                    <option value="Afternoon (1:00 PM – 4:00 PM)">Afternoon (1:00 PM – 4:00 PM)</option>
-                    <option value="Late Afternoon (4:00 PM – 6:00 PM)">Late Afternoon (4:00 PM – 6:00 PM)</option>
-                    <option value="Saturday Appointment">Saturday Appointment</option>
+                    {timeOptions.map((opt, idx) => (
+                      <option key={idx} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="form-notes" className="form-label">Notes or Skin Considerations (Optional)</label>
+                  <label htmlFor="form-notes" className="form-label">{t.contact?.labelNotes || 'Notes or Skin Considerations (Optional)'}</label>
                   <textarea
                     id="form-notes"
                     name="notes"
@@ -196,17 +233,17 @@ export default function Contact({ onOpenWhatsAppModal }) {
                     rows="3"
                     value={formData.notes}
                     onChange={handleChange}
-                    placeholder="Tell us any specific skin concerns or consultation requests..."
+                    placeholder={t.contact?.placeholderNotes || 'Tell us any specific skin concerns or consultation requests...'}
                   />
                 </div>
 
                 <button type="submit" className="btn btn-whatsapp full-width-btn">
-                  <span>Send via WhatsApp</span>
+                  <span>{t.contact?.submitBtn || 'Send Enquiry'}</span>
                   <span aria-hidden="true">→</span>
                 </button>
 
                 <p className="form-privacy-note">
-                  {contactForm.notice}
+                  {t.contact?.privacyNote || contactForm.notice}
                 </p>
               </form>
             </div>
