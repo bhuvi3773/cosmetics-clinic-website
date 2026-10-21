@@ -52,40 +52,53 @@ export default function Treatments({ onOpenWhatsAppModal }) {
             const action = getWhatsAppAction(item.enquiryMessage);
             return (
               <article key={item.id} className="treatment-card">
-                <div className="treatment-card-header">
-                  <span className="treatment-category-badge">{item.category}</span>
-                  {item.badge && <span className="treatment-badge">{item.badge}</span>}
-                </div>
-
-                <h3 className="treatment-title">{item.title}</h3>
-                <p className="treatment-desc">{item.description}</p>
-
-                <div className="treatment-meta">
-                  <div className="meta-item">
-                    <span className="meta-label">Format:</span>
-                    <span className="meta-val">{item.duration}</span>
+                {item.image && (
+                  <div className="treatment-media-wrap">
+                    <img
+                      src={item.image}
+                      alt={item.alt || item.title}
+                      className="treatment-card-img"
+                      loading="lazy"
+                      width="380"
+                      height="240"
+                    />
+                    <div className="treatment-media-overlay" aria-hidden="true"></div>
+                    <span className="treatment-category-badge">{item.category}</span>
+                    {item.badge && <span className="treatment-badge">{item.badge}</span>}
                   </div>
-                  <div className="meta-item">
-                    <span className="meta-label">Focus:</span>
-                    <span className="meta-val">{item.suitableFor}</span>
-                  </div>
-                </div>
+                )}
 
-                <div className="treatment-card-footer">
-                  <div className="treatment-price-wrap">
-                    <span className="price-tag">{item.samplePrice}</span>
+                <div className="treatment-content">
+                  <h3 className="treatment-title">{item.title}</h3>
+                  <p className="treatment-desc">{item.description}</p>
+
+                  <div className="treatment-meta">
+                    <div className="meta-item">
+                      <span className="meta-label">Format:</span>
+                      <span className="meta-val">{item.duration}</span>
+                    </div>
+                    <div className="meta-item">
+                      <span className="meta-label">Focus:</span>
+                      <span className="meta-val">{item.suitableFor}</span>
+                    </div>
                   </div>
-                  <a
-                    href={action.url || '#'}
-                    target={action.isConfigured ? '_blank' : undefined}
-                    rel={action.isConfigured ? 'noopener noreferrer' : undefined}
-                    onClick={(e) => handleEnquire(e, item)}
-                    className="btn btn-secondary treatment-cta-btn"
-                    aria-label={`Enquire via WhatsApp about ${item.title}`}
-                  >
-                    <span>Enquire</span>
-                    <span aria-hidden="true">→</span>
-                  </a>
+
+                  <div className="treatment-card-footer">
+                    <div className="treatment-price-wrap">
+                      <span className="price-tag">{item.samplePrice}</span>
+                    </div>
+                    <a
+                      href={action.url || '#'}
+                      target={action.isConfigured ? '_blank' : undefined}
+                      rel={action.isConfigured ? 'noopener noreferrer' : undefined}
+                      onClick={(e) => handleEnquire(e, item)}
+                      className="btn btn-secondary treatment-cta-btn"
+                      aria-label={`Enquire about ${item.title}`}
+                    >
+                      <span>Enquire</span>
+                      <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
                 </div>
               </article>
             );

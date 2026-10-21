@@ -13,7 +13,7 @@ export const clinicConfig = {
   brand: {
     name: "Aura Skin & Aesthetics",
     shortName: "Aura",
-    tagline: "Customizable Aesthetic Clinic Website Template",
+    tagline: "Bespoke Aesthetics & Restorative Skin Health",
     monogram: "A",
     subtitle: "Clinic Website Template [Demo]",
     isDemo: true,
@@ -63,11 +63,11 @@ export const clinicConfig = {
     description:
       "A client-ready front-end website template for aesthetics clinics and skincare practices. All treatments, practitioner credentials, and consultation details below are sample placeholders ready to be customized with verified clinic information.",
     primaryCta: {
-      text: "Consult on WhatsApp",
+      text: "Enquire via WhatsApp",
       href: "#contact",
     },
     secondaryCta: {
-      text: "Explore Treatments",
+      text: "View Treatments",
       href: "#treatments",
     },
     image: {
@@ -113,6 +113,8 @@ export const clinicConfig = {
         suitableFor: "Uneven texture & dullness",
         samplePrice: "From £120 [Demo Price]",
         badge: "Popular [Sample]",
+        image: "/images/treatment-dermal-peel.jpg",
+        alt: "Aesthetician delicately applying a bespoke exfoliating skin preparation in clinical setting",
         enquiryMessage: "Hello, I would like to enquire about a consultation for the Bespoke Dermal Peel [Sample].",
       },
       {
@@ -124,6 +126,8 @@ export const clinicConfig = {
         suitableFor: "Dehydrated & compromised skin",
         samplePrice: "From £140 [Demo Price]",
         badge: "Essential [Sample]",
+        image: "/images/treatment-hydration.jpg",
+        alt: "Advanced deep dermal hydration serum therapy in a tranquil aesthetic suite",
         enquiryMessage: "Hello, I would like to enquire about a consultation for the Hydration Infusion Therapy [Sample].",
       },
       {
@@ -135,6 +139,8 @@ export const clinicConfig = {
         suitableFor: "Early fine lines & skin fatigue",
         samplePrice: "From £160 [Demo Price]",
         badge: "Signature [Sample]",
+        image: "/images/treatment-collagen-facial.jpg",
+        alt: "Gentle restorative facial massage and collagen infusion in a peaceful clinic suite",
         enquiryMessage: "Hello, I would like to enquire about a consultation for the Targeted Collagen Facial [Sample].",
       },
       {
@@ -146,6 +152,8 @@ export const clinicConfig = {
         suitableFor: "Blemish-prone & congested skin",
         samplePrice: "From £130 [Demo Price]",
         badge: "Targeted [Sample]",
+        image: "/images/treatment-clarifying-protocol.jpg",
+        alt: "Calibrated clarifying skin therapy with calming light application and pure botanicals",
         enquiryMessage: "Hello, I would like to enquire about a consultation for the Clarifying Skin Protocol [Sample].",
       },
       {
@@ -157,6 +165,8 @@ export const clinicConfig = {
         suitableFor: "Sensitive & reactive skin types",
         samplePrice: "From £115 [Demo Price]",
         badge: "Gentle [Sample]",
+        image: "/images/treatment-barrier-recovery.jpg",
+        alt: "Soothing lipid-rich warm compress treatment for delicate and reactive skin types",
         enquiryMessage: "Hello, I would like to enquire about a consultation for the Restorative Barrier Therapy [Sample].",
       },
       {
@@ -168,6 +178,8 @@ export const clinicConfig = {
         suitableFor: "First-time clinic visitors",
         samplePrice: "From £60 [Demo Price]",
         badge: "Consultation [Sample]",
+        image: "/images/treatment-skin-assessment.jpg",
+        alt: "Lead aesthetic practitioner conducting a personalized digital skin assessment with client",
         enquiryMessage: "Hello, I would like to enquire about booking a Comprehensive Skin Assessment [Sample].",
       },
     ],
@@ -232,6 +244,8 @@ export const clinicConfig = {
     lead: "A private aesthetic practice focused on thoughtful skin health, individual consultations, and quiet, unhurried care.",
     story1: "Founded on the principle that aesthetic care should enhance natural facial harmony, our studio provides a tranquil sanctuary where clients receive honest, personalized assessments without pressure or exaggerated promises.",
     story2: "This template is fully modular: all text, clinic values, and facility descriptions can be updated to reflect your verified clinic history, hygiene accreditations, and local premises details.",
+    image: "/images/clinic-architecture.jpg",
+    imageAlt: "Tranquil architectural clinic interior with indoor botanical courtyard and limestone finishes",
     values: [
       {
         id: "val-consultation",
@@ -262,6 +276,8 @@ export const clinicConfig = {
     title: "Meet Your Lead Practitioner [Placeholder]",
     name: "[Practitioner Full Name — Placeholder]",
     role: "Lead Aesthetic Practitioner & Clinic Director [Sample]",
+    image: "/images/practitioner-portrait.jpg",
+    imageAlt: "Lead clinical aesthetic director in consultation suite",
     bio: "With professional training in aesthetic medicine and dermal health, our lead practitioner is dedicated to delivering personalized, ethical care. We believe in unhurried consultations that help you make informed decisions about your skin health. (Note: Replace this sample text with verified practitioner background, qualifications, and certified clinical experience).",
     credentialsNotice: "Notice: Real practitioner credentials, regulatory registrations (e.g. GMC / NMC / GDC), and certified training must be confirmed by the clinic owner before live deployment.",
     credentials: [
@@ -322,6 +338,13 @@ export const clinicConfig = {
         category: "Consultation Room",
         image: "/images/clinic-consultation-desk.jpg",
         alt: "Tranquil consultation room with travertine desk overlooking private garden courtyard",
+      },
+      {
+        id: "gal-architecture",
+        title: "Sanctuary Courtyard & Architecture",
+        category: "Clinic Sanctuary",
+        image: "/images/clinic-architecture.jpg",
+        alt: "Serene architectural clinic interior with lush indoor courtyard and limestone finish",
       },
     ],
   },

@@ -93,7 +93,7 @@ export default function WhatsAppPlaceholderModal({ isOpen, onClose, message, raw
             className="btn btn-whatsapp modal-demo-link"
             onClick={onClose}
           >
-            <span>Test Launch (Without Number)</span>
+            <span>Test Launch</span>
             <span aria-hidden="true">→</span>
           </a>
           <button

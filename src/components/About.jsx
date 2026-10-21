@@ -16,6 +16,23 @@ export default function About() {
             <p className="about-lead">{about.lead}</p>
             <p className="about-text">{about.story1}</p>
             <p className="about-text">{about.story2}</p>
+
+            {about.image && (
+              <div className="about-media-frame">
+                <img
+                  src={about.image}
+                  alt={about.imageAlt}
+                  className="about-image"
+                  loading="lazy"
+                  width="600"
+                  height="400"
+                />
+                <div className="about-image-badge">
+                  <span className="status-dot" aria-hidden="true"></span>
+                  <span>Serene Clinic Sanctuary [Sample]</span>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Values Cards Column */}

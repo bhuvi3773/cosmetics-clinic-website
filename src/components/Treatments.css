@@ -62,46 +62,86 @@
   background: var(--color-bg-surface);
   border: 1px solid var(--color-border-card);
   border-radius: var(--radius-lg);
-  padding: 1.85rem;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: all var(--transition-base);
   position: relative;
+  box-shadow: 0 2px 8px rgba(30, 29, 27, 0.03);
 }
 
 .treatment-card:hover {
   border-color: var(--color-accent-border);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
 }
 
-.treatment-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+/* Treatment Media Frame */
+.treatment-media-wrap {
+  position: relative;
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+  background-color: var(--color-bg-subtle);
+}
+
+.treatment-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.treatment-card:hover .treatment-card-img {
+  transform: scale(1.06);
+}
+
+.treatment-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(27, 26, 24, 0.05) 0%, rgba(27, 26, 24, 0.35) 100%);
+  pointer-events: none;
 }
 
 .treatment-category-badge {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 600;
   color: var(--color-accent-deep);
-  background: var(--color-accent-surface);
-  padding: 0.25rem 0.65rem;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  padding: 0.28rem 0.75rem;
   border-radius: var(--radius-full);
-  border: 1px solid var(--color-accent-border);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 2;
 }
 
 .treatment-badge {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
   font-size: 0.72rem;
   font-weight: 600;
-  color: var(--color-text-muted);
-  background: var(--color-bg-subtle);
-  padding: 0.25rem 0.65rem;
+  color: #ffffff;
+  background: rgba(27, 26, 24, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 0.28rem 0.75rem;
   border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.treatment-content {
+  padding: 1.5rem 1.6rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .treatment-title {

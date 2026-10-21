@@ -43,8 +43,9 @@ export default function Hero({ onOpenWhatsAppModal }) {
               rel={whatsAppAction.isConfigured ? 'noopener noreferrer' : undefined}
               onClick={handleWhatsAppClick}
               className="btn btn-whatsapp hero-primary-btn"
-              aria-label="Enquire via WhatsApp about consultation options"
+              aria-label="Enquire via WhatsApp"
             >
+              <span className="status-dot" aria-hidden="true"></span>
               <svg
                 width="18"
                 height="18"

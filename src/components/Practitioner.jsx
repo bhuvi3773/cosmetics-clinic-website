@@ -16,9 +16,23 @@ export default function Practitioner() {
 
           <div className="practitioner-body">
             <div className="practitioner-identity">
-              <div className="practitioner-avatar-placeholder" aria-hidden="true">
-                <span>{clinicConfig.brand.monogram}</span>
-              </div>
+              {practitioner.image ? (
+                <div className="practitioner-portrait-wrap">
+                  <img
+                    src={practitioner.image}
+                    alt={practitioner.imageAlt || practitioner.name}
+                    className="practitioner-portrait-img"
+                    loading="lazy"
+                    width="96"
+                    height="96"
+                  />
+                  <span className="portrait-status-dot" aria-hidden="true"></span>
+                </div>
+              ) : (
+                <div className="practitioner-avatar-placeholder" aria-hidden="true">
+                  <span>{clinicConfig.brand.monogram}</span>
+                </div>
+              )}
               <div className="practitioner-name-group">
                 <h3 className="practitioner-name">{practitioner.name}</h3>
                 <span className="practitioner-role">{practitioner.role}</span>

@@ -63,9 +63,9 @@ export default function Packages({ onOpenWhatsAppModal }) {
                     rel={action.isConfigured ? 'noopener noreferrer' : undefined}
                     onClick={(e) => handleEnquire(e, pkg)}
                     className="btn btn-whatsapp package-cta-btn"
-                    aria-label={`Enquire via WhatsApp for ${pkg.name}`}
+                    aria-label={`Enquire about ${pkg.name}`}
                   >
-                    <span>Enquire on Package</span>
+                    <span>Enquire</span>
                     <span aria-hidden="true">→</span>
                   </a>
                 </div>
